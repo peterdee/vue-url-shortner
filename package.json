@@ -1,15 +1,51 @@
 {
   "name": "vue-url-shortner",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "author": {
+    "name": "Peter Dyumin",
+    "url": "https://github.com/peterdee"
+  },
+  "description": "Frontend for the deno-url-shortner project",
+  "homepage": "https://github.com/peterdee/vue-url-shortner",
   "scripts": {
-    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "serve": "vue-cli-service serve --port 5050",
+    "start": "NODE_ENV='production' && node ./serve.js"
+  },
+  "engines": {
+    "node": "14.3.0",
+    "npm": "6.14.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterdee/vue-url-shortner"
+  },
+  "keywords": [
+    "Deno",
+    "Frontend",
+    "Vue",
+    "Vue-Router",
+    "Vuex",
+    "URL shortner"
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "vue": "^2.6.11",
+    "vue-router": "^3.3.2",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
@@ -18,6 +54,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "lint-staged": "^10.2.7",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
