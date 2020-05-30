@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="flex direction-column wrap">
+      <Header />
       <router-view></router-view>
     </div>
     <Footer />
@@ -9,11 +10,13 @@
 
 <script>
 import Footer from './components/Footer';
+import Header from './components/Header';
 import './App.css';
 
 export default {
   components: {
     Footer,
+    Header,
   },
   name: 'App',
 };
