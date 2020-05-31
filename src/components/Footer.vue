@@ -1,10 +1,9 @@
 <template>
-  <div class="flex justify-content-center noselect footer">
+  <div class="flex justify-content-center align-items-center noselect footer">
     <a
       href="https://github.com/peterdee"
     >Peter Dyumin</a>, {{ new Date().getFullYear() }} | Server status: <div
       :class="[
-        'align-self-center',
         'pointer',
         statusClass,
       ]"
@@ -57,6 +56,7 @@ export default {
 .footer {
   font-size: 12px;
   font-weight: 200;
+  height: 30px;
 }
 .checking, .offline, .online {
   border-radius: 50%;
