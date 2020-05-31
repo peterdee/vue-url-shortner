@@ -23,8 +23,11 @@
     "url": "git+https://github.com/peterdee/vue-url-shortner"
   },
   "keywords": [
+    "Axios",
     "Deno",
+    "Express",
     "Frontend",
+    "Static",
     "Vue",
     "Vue-Router",
     "Vuex",
@@ -40,6 +43,7 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
     "helmet": "^3.22.0",

@@ -24,6 +24,11 @@ export default {
 
 <style scoped>
 .wrap {
+  margin: 0 auto;
+  max-width: 732px;
   min-height: calc(100vh - 30px);
+  min-width: 432px;
+  width: 50%;
+  padding: 0 16px;
 }
 </style>

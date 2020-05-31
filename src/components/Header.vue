@@ -38,11 +38,12 @@ export default {
 
 <style scoped>
 .header {
-  font-size: 16px;
-  font-weight: 200;
+  font-size: 20px;
+  font-weight: 100;
+  margin-top: 16px;
 }
 .navigation-element {
-  padding: 25px;
+  padding: 16px;
 }
 .link:hover {
   text-decoration: none;

@@ -51,10 +51,25 @@ body, html {
 .direction-column {
   flex-direction: column;
 }
+.justify-content-center {
+  justify-content: center;
+}
 .justify-content-start {
   justify-content: flex-start;
 }
+.align-items-center {
+  align-items: center;
+}
+.align-self-center {
+  align-self: center;
+}
 
+.margin-top {
+  margin-top: 16px;
+}
+.pointer {
+  cursor: pointer;
+}
 .text-center {
   text-align: center;
 }
