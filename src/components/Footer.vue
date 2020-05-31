@@ -56,7 +56,7 @@ export default {
 .footer {
   font-size: 12px;
   font-weight: 200;
-  height: 30px;
+  height: 40px;
 }
 .checking, .offline, .online {
   border-radius: 50%;

@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="$emit('handle-form')">
     <div class="margin-top">
       <input placeholder="URL" type="text" />
     </div>
@@ -13,6 +13,12 @@
 <script>
 export default {
   name: 'IndexForm',
+  props: {
+    isLoading: {
+      required: true,
+      type: Boolean,
+    },
+  },
 };
 </script>
 

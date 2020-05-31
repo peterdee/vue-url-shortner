@@ -26,7 +26,7 @@ export default {
 .wrap {
   margin: 0 auto;
   max-width: 732px;
-  min-height: calc(100vh - 30px);
+  min-height: calc(100vh - 40px);
   min-width: 432px;
   width: 50%;
   padding: 0 16px;
