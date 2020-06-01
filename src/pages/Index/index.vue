@@ -1,25 +1,36 @@
 <template>
   <div class="flex direction-column index">
-    <div class="text-center title">
+    <div class="noselect text-center title">
       URL Shortner
     </div>
     <IndexForm
       :isLoading="isLoading"
+      :secretStatus="secretStatus"
+      :URLStatus="URLStatus"
       @handle-form="handleForm"
+    />
+    <ErrorMessage
+      :isLoading="isLoading"
+      :message="error"
     />
   </div>
 </template>
 
 <script>
+import ErrorMessage from '../../components/ErrorMessage';
 import IndexForm from './components/IndexForm';
 
 export default {
   components: {
+    ErrorMessage,
     IndexForm,
   },
   data() {
     return {
+      error: '',
       isLoading: false,
+      secretStatus: 'active',
+      URLStatus: 'active',
     };
   },
   methods: {
@@ -33,7 +44,8 @@ export default {
         this.isLoading = true;
       } catch (error) {
         this.isLoading = false;
-        console.log('is error')
+        this.error = "Error!"
+        console.log('is error', error);
       }
     },
   },

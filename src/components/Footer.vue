@@ -2,7 +2,7 @@
   <div class="flex justify-content-center align-items-center noselect footer">
     <a
       href="https://github.com/peterdee"
-    >Peter Dyumin</a>, {{ new Date().getFullYear() }} | Server status: <div
+    >Peter Dyumin</a>, {{ new Date().getFullYear() }} | Backend status: <div
       :class="[
         'pointer',
         statusClass,
