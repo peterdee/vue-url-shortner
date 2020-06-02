@@ -45,7 +45,7 @@ export default {
 .navigation-element {
   padding: 16px;
 }
-.link:hover {
+.link, link:hover {
   text-decoration: none;
 }
 .active {

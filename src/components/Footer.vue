@@ -64,13 +64,25 @@ export default {
   margin-left: 2px;
   width: 10px;
 }
+.checking, .checking:hover, .offline, .offline:hover, .online, .online:hover {
+  transition: background-color 250ms ease-in-out;
+}
 .checking {
+  background-color: #898989;
+}
+.checking:hover {
   background-color: silver;
 }
 .offline {
-  background-color: #ff5566;
+  background-color: rgb(146, 43, 43);
+}
+.offline:hover {
+  background-color: rgb(236, 99, 99);
 }
 .online {
-  background-color: #55ff66;
+  background-color: rgb(43, 134, 146);
+}
+.online:hover {
+  background-color: rgb(99, 220, 236);
 }
 </style>

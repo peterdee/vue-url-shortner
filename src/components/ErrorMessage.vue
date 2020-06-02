@@ -2,7 +2,7 @@
   <div class="flex justify-content-center align-items-center noselect margin-top error">
     <div
       v-if="!isLoading && message"
-      class="flex justify-content-center align-items-center message"
+      class="flex justify-content-center align-items-center text-center message"
     >
       {{ message }}
     </div>
@@ -30,15 +30,15 @@ export default {
 
 <style scoped>
 .error {
-  height: 50px;
+  height: 70px;
 }
 .message {
-  background-color: #ff5566;
+  background-color: rgb(146, 43, 43);
   border-radius: 3px;
   color: white;
   font-size: 24px;
   font-weight: 200;
-  height: 50px;
+  height: 70px;
   width: 100%;
 }
 </style>
