@@ -1,5 +1,6 @@
 <template>
   <div class="flex direction-column index">
+    <SecretModal :show="showSecretModal" />
     <div class="noselect text-center title">
       URL Shortner
     </div>
@@ -25,11 +26,13 @@ import axios from 'axios';
 import { BACKEND } from '../../config';
 import ErrorMessage from '../../components/ErrorMessage';
 import IndexForm from './components/IndexForm';
+import SecretModal from './components/SecretModal';
 
 export default {
   components: {
     ErrorMessage,
     IndexForm,
+    SecretModal,
   },
   data() {
     return {
@@ -37,6 +40,8 @@ export default {
       isLoading: false,
       secret: '',
       secretStatus: 'active',
+      showLinkModal: false,
+      showSecretModal: true,
       url: '',
       URLStatus: 'active',
     };
@@ -69,7 +74,7 @@ export default {
         this.isLoading = true;
 
         // send the request
-        const response = await axios({
+        const { data: { data: response = {} } = {} } = await axios({
           data: {
             secret: trimmedSecret,
             url: trimmedURL,
@@ -78,15 +83,16 @@ export default {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           method: 'POST',
-          url: `${BACKEND}/create-url`,
+          url: `${BACKEND}/create`,
         });
 
         console.log(response);
+
         this.secret = '';
         this.secretStatus = 'active';
         this.url = '';
         this.URLStatus = 'active';
-        this.isLoading = false;
+        return this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
         this.error = "Error!"
