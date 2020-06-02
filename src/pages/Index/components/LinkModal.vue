@@ -16,7 +16,7 @@
           </div>
           <div class="slight-margin-top align-self-center">
             <button
-              class="button-copy"
+              class="button-copy pointer"
               type="button"
               @click="copyToClipboard"
             >

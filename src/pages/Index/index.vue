@@ -34,11 +34,14 @@
 <script>
 import axios from 'axios';
 
-import { BACKEND } from '../../config';
 import ErrorMessage from '../../components/ErrorMessage';
 import IndexForm from './components/IndexForm';
 import LinkModal from './components/LinkModal';
 import SecretModal from './components/SecretModal';
+
+import { BACKEND } from '../../config';
+import sanitize from '../../utilities/sanitize';
+import validate from '../../utilities/validate-url';
 
 export default {
   components: {
@@ -78,15 +81,21 @@ export default {
           return this.error = "Please provide the URL and Secret!"
         }
 
-        // check the trimmed values
-        const trimmedSecret = this.secret.trim();
-        const trimmedURL = this.url.trim();
+        // check the trimmed values and sanitize them
+        const trimmedSecret = sanitize(this.secret.trim());
+        const trimmedURL = sanitize(this.url.trim());
         if (!(trimmedSecret && trimmedURL)) {
           this.secretStatus = (!trimmedSecret && 'error') || 'active';
           this.URLStatus = (!trimmedURL && 'error') || 'active';
           return this.error = "Please provide the URL and Secret!"
         }
         
+        // validate the URL
+        if (!validate(trimmedURL)) {
+          this.URLStatus = 'error';
+          return this.error = "Please provide a valid URL address!"
+        }
+
         this.secretStatus = 'success';
         this.URLStatus = 'success';
         this.isLoading = true;
@@ -126,8 +135,34 @@ export default {
         return this.showLinkModal = true;
       } catch (error) {
         this.isLoading = false;
-        this.error = "Error!"
-        console.log('is error', error);
+        this.secretStatus = 'active';
+        this.showSecretModal = false
+        this.URLStatus = 'active';
+
+        const { response: { data: { info = '', status = null } = {} } = {} } = error;
+
+        if (status && status === 400) {
+          switch (info) {
+            case 'MISSING_DATA': {
+              this.secretStatus = 'error';
+              this.URLStatus = 'error';
+              return this.error = "Missing the required data!";
+            }
+            case 'INVALID_DATA': {
+              this.secretStatus = 'error';
+              this.URLStatus = 'error';
+              return this.error = "Provided data is invalid!";
+            }
+            case 'INVALID_URL': {
+              this.URLStatus = 'error';
+              return this.error = "Provided URL is invalid!";
+            }
+            default:
+              return this.error = "Error! Short link was not created!";
+          }
+        }
+
+        return this.error = "Error! Short link was not created!";
       }
     },
     /**
