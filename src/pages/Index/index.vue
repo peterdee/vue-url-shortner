@@ -1,5 +1,12 @@
 <template>
   <div class="flex direction-column index">
+    <LinkModal
+      :id="short.id"
+      :link="short.link"
+      :show="showLinkModal"
+      :url="short.url"
+      @handle-link-modal="handleLinkModal"
+    />
     <SecretModal
       :show="showSecretModal"
       @handle-secret-modal="handleSecretModal"
@@ -30,12 +37,14 @@ import axios from 'axios';
 import { BACKEND } from '../../config';
 import ErrorMessage from '../../components/ErrorMessage';
 import IndexForm from './components/IndexForm';
+import LinkModal from './components/LinkModal';
 import SecretModal from './components/SecretModal';
 
 export default {
   components: {
     ErrorMessage,
     IndexForm,
+    LinkModal,
     SecretModal,
   },
   data() {
@@ -44,7 +53,12 @@ export default {
       isLoading: false,
       secret: '',
       secretStatus: 'active',
-      showLinkModal: true,
+      short: {
+        id: '',
+        link: '',
+        url: '',
+      },
+      showLinkModal: false,
       showSecretModal: false,
       url: '',
       URLStatus: 'active',
@@ -90,13 +104,26 @@ export default {
           url: `${BACKEND}/create`,
         });
 
-        console.log(response);
-
-        this.secret = '';
+        this.isLoading = false;
         this.secretStatus = 'active';
-        this.url = '';
+        this.showSecretModal = false
         this.URLStatus = 'active';
-        return this.isLoading = false;
+
+        // check the response
+        const { id = '', link = '', url = '' } = response;
+        if (!(id && link && url)) {
+          return this.error = 'Oops! Something went wrong...';
+        }
+        this.short = {
+          id,
+          link,
+          url,
+        };
+
+        // clear the form and show the Link modal
+        this.secret = '';
+        this.url = '';
+        return this.showLinkModal = true;
       } catch (error) {
         this.isLoading = false;
         this.error = "Error!"
@@ -116,7 +143,14 @@ export default {
       return this[name] = value;
     },
     /**
-     * Toggle the modal for the Secret input
+     * Toggle the Link modal
+     * @returns {void}
+     */
+    handleLinkModal() {
+      return this.showLinkModal = !this.showLinkModal;
+    },
+    /**
+     * Toggle the Secret modal
      * @returns {void}
      */
     handleSecretModal() {

@@ -22,7 +22,7 @@
         @input="handleInput"
       />
     </div>
-    <div class="flex justify-content-center">
+    <div class="flex justify-content-center slight-margin">
       <button
         class="button-show-secret"
         type="button"
@@ -32,11 +32,19 @@
       </button>
     </div>
     <button
-      class="margin-top pointer create-button"
+      class="flex justify-content-center align-items-center margin-top pointer create-button"
       :disabled="isLoading"
       type="submit"
     >
-      CREATE
+      <span v-if="isLoading">
+        <img
+          src="../../../assets/loader-small.svg"
+          alt="Loading"
+        />
+      </span>
+      <span v-else>
+        CREATE
+      </span>
     </button>
   </form>
 </template>
@@ -89,18 +97,26 @@ export default {
 .button-show-secret:hover {
   text-decoration: underline;
 }
+.slight-margin {
+  margin-top: 4px;
+}
 .create-button {
   background-color: rgb(43, 134, 146);
   border: none;
   border-radius: 3px;
   color: white;
   font-size: 20px;
-  padding: 20px 36px;
+  height: 66px;
   transition: background-color 250ms ease-in-out;
   width: 100%;
 }
 .create-button:hover {
   background-color: rgb(99, 220, 236);
+  transition: background-color 250ms ease-in-out;
+}
+.create-button:disabled, .create-button:disabled:hover {
+  background-color: silver;
+  cursor: default;
   transition: background-color 250ms ease-in-out;
 }
 </style>

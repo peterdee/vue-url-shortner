@@ -63,12 +63,16 @@ export default {
 .styles {
   background-color: rgb(240, 240, 240);
   border: none;
-  border-bottom: 2px solid rgb(240, 240, 240);
+  border-bottom: 2px solid rgb(225, 225, 225);
   border-radius: 3px;
   font-size: 20px;
   padding: 20px;
   transition: border-bottom 350ms ease-in-out;
   width: 100%;
+}
+.styles:focus {
+  border-bottom: 2px solid #898989;
+  outline: none;
 }
 .error {
   border-bottom: 2px solid rgb(146, 43, 43);
