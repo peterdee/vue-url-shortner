@@ -22,6 +22,15 @@
         @input="handleInput"
       />
     </div>
+    <div class="flex justify-content-center">
+      <button
+        class="button-show-secret"
+        type="button"
+        @click="$emit('handle-secret-modal')"
+      >
+        Why do I need to provide a Secret?
+      </button>
+    </div>
     <button
       class="margin-top pointer create-button"
       :disabled="isLoading"
@@ -70,6 +79,16 @@ export default {
 </script>
 
 <style scoped>
+.button-show-secret {
+  background-color: transparent;
+  border: none;
+  color:rgb(43, 134, 146);
+  font-size: 12px;
+  font-weight: 200;
+}
+.button-show-secret:hover {
+  text-decoration: underline;
+}
 .create-button {
   background-color: rgb(43, 134, 146);
   border: none;

@@ -1,6 +1,9 @@
 <template>
   <div class="flex direction-column index">
-    <SecretModal :show="showSecretModal" />
+    <SecretModal
+      :show="showSecretModal"
+      @handle-secret-modal="handleSecretModal"
+    />
     <div class="noselect text-center title">
       URL Shortner
     </div>
@@ -12,6 +15,7 @@
       :url="url"
       :URLStatus="URLStatus"
       @handle-form="handleForm"
+      @handle-secret-modal="handleSecretModal"
     />
     <ErrorMessage
       :isLoading="isLoading"
@@ -40,8 +44,8 @@ export default {
       isLoading: false,
       secret: '',
       secretStatus: 'active',
-      showLinkModal: false,
-      showSecretModal: true,
+      showLinkModal: true,
+      showSecretModal: false,
       url: '',
       URLStatus: 'active',
     };
@@ -108,8 +112,16 @@ export default {
       const { target: { name = '', value = '' } = {} } = event;
       if (name === 'secret') this.secretStatus = 'active';
       if (name === 'url') this.URLStatus = 'active';
+      this.error = '';
       return this[name] = value;
     },
+    /**
+     * Toggle the modal for the Secret input
+     * @returns {void}
+     */
+    handleSecretModal() {
+      return this.showSecretModal = !this.showSecretModal;
+    }
   },
   name: 'Index',
 };
@@ -117,6 +129,7 @@ export default {
 
 <style scoped>
 .index {
+  min-height: 500px;
   padding: 16px;
 }
 .title {
