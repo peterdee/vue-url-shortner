@@ -1,6 +1,8 @@
 <template>
-  <div class="flex">
-    This is Manage
+  <div class="flex direction-column manage">
+    <div class="title">
+      Manage
+    </div>
   </div>
 </template>
 
@@ -11,5 +13,12 @@ export default {
 </script>
 
 <style scoped>
-
+.manage {
+  padding: 16px;
+}
+.title {
+  color: rgb(43, 134, 146);
+  font-size: 24px;
+  font-weight: 100;
+}
 </style>

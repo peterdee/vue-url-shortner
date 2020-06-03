@@ -1,10 +1,13 @@
 <template>
   <transition name="fade">
     <div v-if="show">
-      <div class="background" />
+      <div
+        class="background"
+        @click="$emit('handle-link-modal')"
+      />
       <div class="flex direction-column justify-content-space-between align-items-center modal">
         <div class="flex direction-column width-100">
-          <div class="text-center title">
+          <div class="text-center noselect title">
             Created link
           </div>
           <div class="margin-top">
@@ -14,7 +17,7 @@
               :value="link"
             />
           </div>
-          <div class="slight-margin-top align-self-center">
+          <div class="slight-margin-top align-self-center noselect">
             <button
               class="button-copy pointer"
               type="button"
@@ -25,7 +28,7 @@
           </div>
         </div>
         <button
-          class="margin-top pointer button-close"
+          class="margin-top pointer noselect button-close"
           type="button"
           @click="$emit('handle-link-modal')"
         >

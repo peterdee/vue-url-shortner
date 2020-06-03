@@ -5,7 +5,7 @@
         class="background"
         @click="$emit('handle-secret-modal')"
       />
-      <div class="flex direction-column justify-content-space-between align-items-center modal">
+      <div class="flex direction-column justify-content-space-between align-items-center noselect modal">
         <p>
           A <span
             class="marked"

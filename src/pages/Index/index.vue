@@ -198,6 +198,7 @@ export default {
 
 <style scoped>
 .index {
+  margin: auto 0;
   min-height: 500px;
   padding: 16px;
 }
@@ -205,6 +206,5 @@ export default {
   color: rgb(43, 134, 146);
   font-size: 36px;
   font-weight: 100;
-  margin-top: 64px;
 }
 </style>

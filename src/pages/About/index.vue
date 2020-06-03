@@ -1,6 +1,8 @@
 <template>
-  <div class="flex">
-    This is About
+  <div class="flex direction-column about">
+    <div class="title">
+      About
+    </div>
   </div>
 </template>
 
@@ -11,5 +13,12 @@ export default {
 </script>
 
 <style scoped>
-
+.about {
+  padding: 16px;
+}
+.title {
+  color: rgb(43, 134, 146);
+  font-size: 24px;
+  font-weight: 100;
+}
 </style>

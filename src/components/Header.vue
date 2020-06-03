@@ -1,12 +1,24 @@
 <template>
-  <div class="flex noselect header">
+  <div class="flex align-items-center noselect header">
+    <div class="navigation-element">
+      <router-link
+        class="link"
+        to="/"
+      >
+        <img
+          alt="Logo"
+          class="image"
+          src="../assets/logo.png"
+        />
+      </router-link>
+    </div>
     <div class="navigation-element">
       <router-link
         exact-active-class="active"
         class="link"
         to="/"
       >
-        Index
+        Create
       </router-link>
     </div>
     <div class="navigation-element">
@@ -40,13 +52,18 @@ export default {
 .header {
   font-size: 20px;
   font-weight: 100;
-  margin-top: 16px;
+  height: 50px;
+  margin: 16px 0;
 }
 .navigation-element {
-  padding: 16px;
+  padding: 0 16px;
 }
 .link, link:hover {
   text-decoration: none;
+}
+.image {
+  height: 48px;
+  width: 50px;
 }
 .active {
   border-bottom: 2px solid rgb(43, 134, 146);

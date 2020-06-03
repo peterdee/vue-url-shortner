@@ -2,7 +2,9 @@
   <div>
     <div class="flex direction-column wrap">
       <Header />
-      <router-view></router-view>
+      <div class="flex direction-column pages">
+        <router-view></router-view>
+      </div>
     </div>
     <Footer />
   </div>
@@ -23,12 +25,18 @@ export default {
 </script>
 
 <style scoped>
-.wrap {
+.wrap, .pages {
   margin: 0 auto;
+}
+.wrap {
   max-width: 732px;
   min-height: calc(100vh - 40px);
   min-width: 432px;
-  width: 50%;
   padding: 0 16px;
+  width: 50%;
+}
+.pages {
+  min-height: calc(100vh - 122px);
+  width: 100%;
 }
 </style>

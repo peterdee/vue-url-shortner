@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import About from '../pages/About';
 import Index from '../pages/Index';
 import Manage from '../pages/Manage';
+import NotFound from '../pages/NotFound';
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       component: Manage,
       name: 'Manage',
       path: '/manage',
+    },
+    {
+      component: NotFound,
+      name: 'NotFound',
+      path: "*",
     },
   ],
 });
