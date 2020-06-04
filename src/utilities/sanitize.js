@@ -5,7 +5,7 @@
  */
 function sanitize(data) {
   if (data instanceof Object) {
-    for (var key in data) {
+    for (const key in data) {
       if (/^\$/.test(key)) {
         delete data[key];
       } else {
