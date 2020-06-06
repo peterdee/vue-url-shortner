@@ -15,7 +15,7 @@
     "start": "NODE_ENV='production' && node ./serve.js"
   },
   "engines": {
-    "node": "14.3.0",
+    "node": "14.4.0",
     "npm": "6.14.5"
   },
   "repository": {
@@ -27,10 +27,10 @@
     "Deno",
     "Express",
     "Frontend",
+    "Heroku",
     "Static",
     "Vue",
     "Vue-Router",
-    "Vuex",
     "URL shortner"
   ],
   "gitHooks": {
