@@ -1,11 +1,13 @@
 <template>
   <div class="flex justify-content-center align-items-center noselect margin-top error">
-    <div
-      v-if="!isLoading && message"
-      class="flex justify-content-center align-items-center text-center message"
-    >
-      {{ message }}
-    </div>
+    <transition name="slide-fade">
+      <div
+        v-if="!isLoading && message"
+        class="flex justify-content-center align-items-center text-center message"
+      >
+        {{ message }}
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -40,5 +42,15 @@ export default {
   font-weight: 200;
   height: 70px;
   width: 100%;
+}
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

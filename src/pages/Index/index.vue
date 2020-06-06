@@ -78,7 +78,7 @@ export default {
         if (!(this.secret && this.url)) {
           this.secretStatus = (!this.secret && 'error') || 'active';
           this.URLStatus = (!this.url && 'error') || 'active';
-          return this.error = "Please provide the URL and Secret!"
+          return this.error = 'Please provide URL and Secret!';
         }
 
         // check the trimmed values and sanitize them
@@ -87,13 +87,13 @@ export default {
         if (!(trimmedSecret && trimmedURL)) {
           this.secretStatus = (!trimmedSecret && 'error') || 'active';
           this.URLStatus = (!trimmedURL && 'error') || 'active';
-          return this.error = "Please provide the URL and Secret!"
+          return this.error = 'Please provide URL and Secret!';
         }
         
         // validate the URL
         if (!validate(trimmedURL)) {
           this.URLStatus = 'error';
-          return this.error = "Please provide a valid URL address!"
+          return this.error = 'Please provide a valid URL address!';
         }
 
         this.secretStatus = 'success';
@@ -146,23 +146,23 @@ export default {
             case 'MISSING_DATA': {
               this.secretStatus = 'error';
               this.URLStatus = 'error';
-              return this.error = "Missing the required data!";
+              return this.error = 'Missing the required data!';
             }
             case 'INVALID_DATA': {
               this.secretStatus = 'error';
               this.URLStatus = 'error';
-              return this.error = "Provided data is invalid!";
+              return this.error = 'Provided data is invalid!';
             }
             case 'INVALID_URL': {
               this.URLStatus = 'error';
-              return this.error = "Provided URL is invalid!";
+              return this.error = 'Provided URL is invalid!';
             }
             default:
-              return this.error = "Error! Short link was not created!";
+              return this.error = 'Error! Short link was not created!';
           }
         }
 
-        return this.error = "Error! Short link was not created!";
+        return this.error = 'Error! Short link was not created!';
       }
     },
     /**
@@ -190,7 +190,7 @@ export default {
      */
     handleSecretModal() {
       return this.showSecretModal = !this.showSecretModal;
-    }
+    },
   },
   name: 'Index',
 };
@@ -199,7 +199,7 @@ export default {
 <style scoped>
 .index {
   margin: auto 0;
-  min-height: 500px;
+  min-height: 470px;
   padding: 16px;
 }
 .title {

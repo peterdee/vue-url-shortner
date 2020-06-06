@@ -3,24 +3,16 @@
     <div v-if="show">
       <div
         class="background"
-        @click="closeModal"
+        @click="$emit('handle-manage-modal')"
       />
       <div class="flex direction-column justify-content-space-between align-items-center modal">
         <div class="flex direction-column width-100">
           <div class="text-center noselect title">
-            Created link
+            Short URL Link
           </div>
           <div class="margin-top">
-            <textarea
-              class="textarea"
-              disabled="true"
-              :value="link"
-            />
+
           </div>
-          <LinkButton
-            :text="copiedText"
-            @handle-click="copyToClipboard"
-          />
         </div>
         <button
           class="margin-top pointer noselect button-close"
@@ -35,12 +27,7 @@
 </template>
 
 <script>
-import LinkButton from '../../../components/LinkButton';
-
 export default {
-  components: {
-    LinkButton,
-  },
   data() {
     return {
       isCopied: false,

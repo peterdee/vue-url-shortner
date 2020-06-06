@@ -22,39 +22,27 @@
         @input="handleInput"
       />
     </div>
-    <div class="flex justify-content-center slight-margin">
-      <button
-        class="button-show-secret"
-        type="button"
-        @click="$emit('handle-secret-modal')"
-      >
-        Why do I need to provide a Secret?
-      </button>
-    </div>
-    <button
-      class="flex justify-content-center align-items-center margin-top pointer create-button"
-      :disabled="isLoading"
-      type="submit"
-    >
-      <span v-if="isLoading">
-        <img
-          src="../../../assets/loader-small.svg"
-          alt="Loading"
-        />
-      </span>
-      <span v-else>
-        CREATE
-      </span>
-    </button>
+    <LinkButton
+      text="Why do I need to provide a Secret?"
+      @handle-click="$emit('handle-secret-modal')"
+    />
+    <BigButton
+      :isLoading="isLoading"
+      text="CREATE"
+    />
   </form>
 </template>
 
 <script>
+import BigButton from '../../../components/BigButton';
 import Input from '../../../components/Input';
+import LinkButton from '../../../components/LinkButton';
 
 export default {
   components: {
+    BigButton,
     Input,
+    LinkButton,
   },
   name: 'IndexForm',
   props: {
@@ -85,38 +73,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.button-show-secret {
-  background-color: transparent;
-  border: none;
-  color:rgb(43, 134, 146);
-  font-size: 12px;
-  font-weight: 200;
-}
-.button-show-secret:hover {
-  text-decoration: underline;
-}
-.slight-margin {
-  margin-top: 4px;
-}
-.create-button {
-  background-color: rgb(43, 134, 146);
-  border: none;
-  border-radius: 3px;
-  color: white;
-  font-size: 20px;
-  height: 66px;
-  transition: background-color 250ms ease-in-out;
-  width: 100%;
-}
-.create-button:hover {
-  background-color: rgb(99, 220, 236);
-  transition: background-color 250ms ease-in-out;
-}
-.create-button:disabled, .create-button:disabled:hover {
-  background-color: silver;
-  cursor: default;
-  transition: background-color 250ms ease-in-out;
-}
-</style>

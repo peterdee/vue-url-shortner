@@ -16,12 +16,12 @@
       Staging environment is hosted on <a href="https://www.heroku.com/">Heroku</a>.
     </div>
     <div class="margin-top">
-      Backend repository link: <a
+      Backend repository: <a
         href="https://github.com/peterdee/deno-url-shortner"
       >https://github.com/peterdee/deno-url-shortner</a>
     </div>
     <div class="margin-top">
-      Frontend repository link: <a
+      Frontend repository: <a
         href="https://github.com/peterdee/vue-url-shortner"
       >https://github.com/peterdee/vue-url-shortner</a>
     </div>
