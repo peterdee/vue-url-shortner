@@ -1,6 +1,6 @@
 <template>
-  <div class="flex direction-column justify-content-center align-items-center about">
-    <div class="title">
+  <div class="flex direction-column justify-content-center align-items-center not-found">
+    <div class="title text-center noselect">
       OOPS! REQUESTED PAGE NOT FOUND!
     </div>
   </div>
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style scoped>
-.about {
+.not-found {
   margin: auto 0;
   padding: 16px;
 }

@@ -10,7 +10,7 @@ Stack: [`Express`](https://expressjs.com/), [`Vue`](https://vuejs.org/), [`Vue-R
 
 DEV: http://localhost:5050
 
-STAGE: *in progress*
+STAGE: https://vue-url-shortner.herokuapp.com
 
 ### Deploy
 
@@ -59,4 +59,4 @@ See the [serve.js](serve.js) file for more information.
 
 ### Heroku
 
-*IN PROGRESS*
+The `stage` branch is deployed to Heroku automatically.

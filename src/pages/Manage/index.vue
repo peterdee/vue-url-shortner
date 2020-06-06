@@ -1,6 +1,6 @@
 <template>
   <div class="flex direction-column manage">
-    <div class="title">
+    <div class="title noselect">
       Manage
     </div>
   </div>

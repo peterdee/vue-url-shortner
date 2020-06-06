@@ -3,7 +3,7 @@
     <div v-if="show">
       <div
         class="background"
-        @click="$emit('handle-link-modal')"
+        @click="closeModal"
       />
       <div class="flex direction-column justify-content-space-between align-items-center modal">
         <div class="flex direction-column width-100">
@@ -23,14 +23,14 @@
               type="button"
               @click="copyToClipboard"
             >
-              Copy link to the clipboard
+              {{ copiedText }}
             </button>
           </div>
         </div>
         <button
           class="margin-top pointer noselect button-close"
           type="button"
-          @click="$emit('handle-link-modal')"
+          @click="closeModal"
         >
           OK
         </button>
@@ -41,6 +41,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isCopied: false,
+    };
+  },
+  computed: {
+    copiedText() {
+      return (this.isCopied && 'Copied ✓') || 'Copy link to the clipboard';
+    },
+  },
   name: 'LinkModal',
   props: {
     id: {
@@ -62,6 +72,14 @@ export default {
   },
   methods: {
     /**
+     * Handle modal closing
+     * @returns {void}
+     */
+    closeModal() {
+      this.isCopied = false;
+      return this.$emit('handle-link-modal');
+    },
+    /**
      * Copy the link to the clipboard
      * @returns {void}
      */
@@ -72,6 +90,7 @@ export default {
       el.select();
       document.execCommand('copy');
       document.body.removeChild(el);
+      return this.isCopied = true;
     },
   },
 };
