@@ -7,46 +7,74 @@
       <div class="flex direction-column justify-content-space-between align-items-center modal">
         <div class="flex direction-column width-100">
           <div class="text-center noselect title">
-            Short URL Link
+            Manage Link
           </div>
           <div class="margin-top">
-            Created: {{ creationDate }}
-          </div>
-          <div class="margin-top">
-            Original URL: {{ url }}
-          </div>
-          <div class="margin-top">
-            Short URL: {{ link }} (ID {{ id }})
+            Created on {{ creationDate }}
           </div>
           <div class="margin-top">
             Clicks: {{ clicks }}
           </div>
+          <div class="margin-top">
+            Original URL:
+          </div>
+          <div class="slight-margin-top">
+            <Textarea
+              disabled="true"
+              :value="url"
+            />
+          </div>
+          <div class="margin-top">
+            Short URL:
+          </div>
+          <div class="slight-margin-top">
+            <Textarea
+              disabled="true"
+              :value="link"
+            />
+          </div>
+          <div class="margin-top">
+            Provide a Secret to delete the link:
+          </div>
+          <ManageModalForm
+            :handleInput="handleInput"
+            :isLoading="isLoading"
+            :secret="secret"
+            :secretStatus="secretStatus"
+            @handle-secret-form="$emit('handle-secret-form')"
+            @handle-manage-modal="$emit('handle-manage-modal')"
+          />
         </div>
-        <button
-          class="margin-top pointer noselect button-close"
-          type="button"
-          @click="closeModal"
-        >
-          OK
-        </button>
       </div>
     </div>
   </transition>
 </template>
 
 <script>
+import ManageModalForm from './ManageModalForm';
 import ModalBackground from '../../../components/ModalBackground';
+import Textarea from '../../../components/Textarea';
+
+import months from '../../../utilities/months-list';
 
 export default {
   components: {
+    ManageModalForm,
     ModalBackground,
+    Textarea,
   },
   computed: {
     creationDate() {
-      return new Date(this.updated);
+      const date = new Date(Number(this.updated));
+      const hh = date.getHours() > 9 ? date.getHours() : `0${date.getHours()}`;
+      const mm = date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`;
+      const day = date.getDate();
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+      return `${month} ${day}, ${year}, at ${hh}:${mm} GMT+0`;
     },
   },
-  name: 'LinkModal',
+  name: 'ManageModal',
   props: {
     clicks: {
       default() {
@@ -94,11 +122,11 @@ export default {
 .modal {
   background-color: white;
   border-radius: 15px;
-  height: 370px;
+  height: 720px;
   left: calc(50% - 216px);
   padding: 24px;
   position: fixed;
-  top: calc(50% - 185px);
+  top: calc(50% - 360px);
   width: 432px;
   z-index: 11;
 }
@@ -106,17 +134,6 @@ export default {
   font-size: 24px;
   font-weight: 200;
   color:rgb(43, 134, 146);
-}
-.textarea {
-  background-color: rgb(240, 240, 240);
-  border: none;
-  border-radius: 3px;
-  color: black;
-  font-size: 16px;
-  height: 80px;
-  padding: 16px;
-  resize: none;
-  width: 100%;
 }
 .button-close {
   background-color: rgb(43, 134, 146);

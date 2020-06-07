@@ -38,10 +38,15 @@ export default {
   background-color: rgb(146, 43, 43);
   border-radius: 3px;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 200;
-  height: 70px;
+  height: 64px;
+  transition: background-color 250ms ease-in-out;
   width: 100%;
+}
+.message:hover {
+  background-color: rgb(236, 99, 99);
+  transition: background-color 250ms ease-in-out;
 }
 .slide-fade-enter-active {
   transition: all .3s ease;
