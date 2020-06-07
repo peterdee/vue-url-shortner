@@ -1,9 +1,8 @@
 <template>
   <transition name="fade">
     <div v-if="show">
-      <div
-        class="background"
-        @click="closeModal"
+      <ModalBackground
+        @handle-modal-background="closeModal"
       />
       <div class="flex direction-column justify-content-space-between align-items-center modal">
         <div class="flex direction-column width-100">
@@ -22,24 +21,24 @@
             @handle-click="copyToClipboard"
           />
         </div>
-        <button
-          class="margin-top pointer noselect button-close"
-          type="button"
-          @click="closeModal"
-        >
-          OK
-        </button>
+        <ActionButton
+          @handle-action-button="closeModal"
+        />
       </div>
     </div>
   </transition>
 </template>
 
 <script>
+import ActionButton from '../../../components/ActionButton';
 import LinkButton from '../../../components/LinkButton';
+import ModalBackground from '../../../components/ModalBackground';
 
 export default {
   components: {
+    ActionButton,
     LinkButton,
+    ModalBackground,
   },
   data() {
     return {
@@ -97,16 +96,6 @@ export default {
 </script>
 
 <style scoped>
-.background {
-  background-color: black;
-  height: 100vh;
-  left: 0;
-  opacity: 0.5;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
 .modal {
   background-color: white;
   border-radius: 15px;
@@ -133,20 +122,6 @@ export default {
   padding: 16px;
   resize: none;
   width: 100%;
-}
-.button-close {
-  background-color: rgb(43, 134, 146);
-  border: none;
-  border-radius: 3px;
-  color: white;
-  font-size: 16px;
-  padding: 8px 0;
-  transition: background-color 250ms ease-in-out;
-  width: 100px;
-}
-.button-close:hover {
-  background-color: rgb(99, 220, 236);
-  transition: background-color 250ms ease-in-out;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s;

@@ -53,7 +53,7 @@ export default {
         clicks: null,
         id: '',
         link: '',
-        updated: null,
+        updated: '',
         url: '',
       },
       secret: '',
@@ -124,6 +124,7 @@ export default {
           updated = null,
           url = '',
         } = response;
+        console.log(response)
         if (!(id && link && updated && url)) {
           return this.error = 'Oops! Something went wrong...';
         }
