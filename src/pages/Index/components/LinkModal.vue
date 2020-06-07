@@ -10,8 +10,7 @@
             Created link
           </div>
           <div class="margin-top">
-            <textarea
-              class="textarea"
+            <Textarea
               disabled="true"
               :value="link"
             />
@@ -33,12 +32,14 @@
 import ActionButton from '../../../components/ActionButton';
 import LinkButton from '../../../components/LinkButton';
 import ModalBackground from '../../../components/ModalBackground';
+import Textarea from '../../../components/Textarea';
 
 export default {
   components: {
     ActionButton,
     LinkButton,
     ModalBackground,
+    Textarea,
   },
   data() {
     return {
@@ -111,17 +112,6 @@ export default {
   font-size: 24px;
   font-weight: 200;
   color:rgb(43, 134, 146);
-}
-.textarea {
-  background-color: rgb(240, 240, 240);
-  border: none;
-  border-radius: 3px;
-  color: black;
-  font-size: 16px;
-  height: 80px;
-  padding: 16px;
-  resize: none;
-  width: 100%;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s;

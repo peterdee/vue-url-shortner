@@ -1,8 +1,12 @@
 <template>
   <button
-    class="flex justify-content-center align-items-center margin-top pointer"
+    :class="[
+      'flex justify-content-center align-items-center margin-top pointer',
+      danger,
+    ]"
     :disabled="isLoading"
-    type="submit"
+    :type="type"
+    @click="$emit('handle-small-button')"
   >
     <span v-if="isLoading">
       <img
@@ -18,13 +22,29 @@
 
 <script>
 export default {
-  name: 'BigButton',
+  computed: {
+    danger() {
+      return (this.isDanger && 'danger') || '';
+    }
+  }, 
+  name: 'SmallButton',
   props: {
+    isDanger: {
+      default() {
+        return false;
+      },
+      required: false,
+      type: Boolean,
+    },
     isLoading: {
       required: true,
       type: Boolean,
     },
     text: {
+      required: true,
+      type: String,
+    },
+    type: {
       required: true,
       type: String,
     },
@@ -38,10 +58,10 @@ button {
   border: none;
   border-radius: 3px;
   color: white;
-  font-size: 20px;
-  height: 64px;
+  font-size: 12px;
+  height: 48px;
   transition: background-color 250ms ease-in-out;
-  width: 100%;
+  min-width: 180px;
 }
 button:hover {
   background-color: rgb(99, 220, 236);
@@ -50,6 +70,13 @@ button:hover {
 button:disabled, button:disabled:hover {
   background-color: silver;
   cursor: default;
+  transition: background-color 250ms ease-in-out;
+}
+.danger {
+  background-color: rgb(146, 43, 43);
+}
+.danger:hover {
+  background-color: rgb(236, 99, 99);
   transition: background-color 250ms ease-in-out;
 }
 </style>

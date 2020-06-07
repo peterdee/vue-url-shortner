@@ -5,6 +5,7 @@
     </div>
     <ManageModal
       :clicks="loaded.clicks"
+      :handleInput="handleInput"
       :id="loaded.id"
       :link="loaded.link"
       :secret="secret"
@@ -13,6 +14,7 @@
       :updated="loaded.updated"
       :url="loaded.url"
       @handle-manage-modal="handleManageModal"
+      @handle-secret-form="handleSecretForm"
     />
     <ManageForm
       :handleInput="handleInput"
@@ -143,6 +145,9 @@ export default {
         this.isLoading = false;
         return console.log(error);
       }
+    },
+    handleSecretForm() {
+      return console.log('secret form');
     },
     /**
      * Toggle the Manage modal
