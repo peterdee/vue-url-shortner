@@ -1,9 +1,8 @@
 <template>
   <transition name="fade">
     <div v-if="show">
-      <div
-        class="background"
-        @click="$emit('handle-manage-modal')"
+      <ModalBackground
+        @handle-modal-background="$emit('handle-manage-modal')"
       />
       <div class="flex direction-column justify-content-space-between align-items-center modal">
         <div class="flex direction-column width-100">
@@ -11,7 +10,16 @@
             Short URL Link
           </div>
           <div class="margin-top">
-
+            Created: {{ creationDate }}
+          </div>
+          <div class="margin-top">
+            Original URL: {{ url }}
+          </div>
+          <div class="margin-top">
+            Short URL: {{ link }} (ID {{ id }})
+          </div>
+          <div class="margin-top">
+            Clicks: {{ clicks }}
           </div>
         </div>
         <button
@@ -27,19 +35,26 @@
 </template>
 
 <script>
+import ModalBackground from '../../../components/ModalBackground';
+
 export default {
-  data() {
-    return {
-      isCopied: false,
-    };
+  components: {
+    ModalBackground,
   },
   computed: {
-    copiedText() {
-      return (this.isCopied && 'Copied ✓') || 'Copy link to the clipboard';
+    creationDate() {
+      return new Date(this.updated);
     },
   },
   name: 'LinkModal',
   props: {
+    clicks: {
+      default() {
+        return '0';
+      },
+      required: false,
+      type: [Number, String],
+    },
     id: {
       required: true,
       type: String,
@@ -48,9 +63,21 @@ export default {
       required: true,
       type: String,
     },
+    secret: {
+      required: true,
+      type: String,
+    },
+    secretStatus: {
+      required: true,
+      type: String,
+    },
     show: {
       required: true,
       type: Boolean,
+    },
+    updated: {
+      required: true,
+      type: String,
     },
     url: {
       required: true,
@@ -58,50 +85,20 @@ export default {
     },
   },
   methods: {
-    /**
-     * Handle modal closing
-     * @returns {void}
-     */
-    closeModal() {
-      this.isCopied = false;
-      return this.$emit('handle-link-modal');
-    },
-    /**
-     * Copy the link to the clipboard
-     * @returns {void}
-     */
-    copyToClipboard() {
-      const el = document.createElement('textarea');
-      el.value = this.link;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      return this.isCopied = true;
-    },
+
   },
 };
 </script>
 
 <style scoped>
-.background {
-  background-color: black;
-  height: 100vh;
-  left: 0;
-  opacity: 0.5;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
 .modal {
   background-color: white;
   border-radius: 15px;
-  height: 270px;
+  height: 370px;
   left: calc(50% - 216px);
   padding: 24px;
   position: fixed;
-  top: calc(50% - 135px);
+  top: calc(50% - 185px);
   width: 432px;
   z-index: 11;
 }
