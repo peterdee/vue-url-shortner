@@ -58,8 +58,14 @@ export default {
 .navigation-element {
   padding: 0 16px;
 }
-.link, link:hover {
+.link {
   text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 250ms ease-in-out;
+}
+.link:hover {
+  border-bottom: 2px solid rgb(43, 134, 146);
+  transition: border-bottom 250ms ease-in-out;
 }
 .image {
   height: 48px;
@@ -67,5 +73,6 @@ export default {
 }
 .active {
   border-bottom: 2px solid rgb(43, 134, 146);
+  transition: border-bottom 250ms ease-in-out;
 }
 </style>
