@@ -186,16 +186,35 @@ export default {
           url: `${BACKEND}/delete/${shortId}`,
         });
 
+        // close the modal
         this.isLoading = false;
         this.secret = '';
         this.secretStatus = 'active';
         this.short = '';
         this.shortStatus = 'active';
-
         return this.showManageModal = false;
       } catch (error) {
         this.isLoading = false;
-        this.secretError = 'Error!';
+        this.secretStatus = 'active';
+        this.shortStatus = 'active';
+
+        const { response: { data: { info = '', status = null } = {} } = {} } = error;
+
+        if (status && status === 400 && info && info === 'MISSING_DATA') {
+          this.secretStatus = 'error';
+          return this.secretError = 'Missing the required data!';
+        }
+
+        if (status && status === 401 && info && info === 'ACCESS_DENIED') {
+          this.secretStatus = 'error';
+          return this.secretError = 'Secret is incorrect!';
+        }
+
+        if (status && status === 404 && info && info === 'LINK_NOT_FOUND') {
+          return this.secretError = 'Short URL not found!';
+        }
+
+        return this.secretError = 'Oops! Something went wrong...';
       }
     },
     /**
@@ -203,6 +222,9 @@ export default {
      * @returns {void}
      */
     handleManageModal() {
+      this.secret = '';
+      this.secretError = '';
+      this.secretStatus = 'active';
       return this.showManageModal = !this.showManageModal;
     },
   },

@@ -133,9 +133,6 @@ export default {
       type: String,
     },
   },
-  methods: {
-
-  },
 };
 </script>
 
@@ -143,11 +140,11 @@ export default {
 .modal {
   background-color: white;
   border-radius: 15px;
-  height: 720px;
+  height: 650px;
   left: calc(50% - 216px);
   padding: 24px;
   position: fixed;
-  top: calc(50% - 360px);
+  top: calc(50% - 325px);
   width: 432px;
   z-index: 11;
 }

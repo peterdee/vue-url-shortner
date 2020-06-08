@@ -32,7 +32,7 @@ export default {
 
 <style scoped>
 .error {
-  height: 70px;
+  height: 64px;
 }
 .message {
   background-color: rgb(146, 43, 43);

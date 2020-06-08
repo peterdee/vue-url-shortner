@@ -18,7 +18,7 @@
         :isDanger="true"
         text="DELETE"
         type="submit"
-        @handle-small-button.prevent="$emit('handle-secret-form')"
+        @handle-small-button="$emit('handle-secret-form')"
       />
       <SmallButton
         :isLoading="isLoading"
