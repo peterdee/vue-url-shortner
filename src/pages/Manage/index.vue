@@ -145,10 +145,26 @@ export default {
 
         // clear the modal form and show the modal
         this.secret = '';
+        this.secretStatus = 'active';
         return this.showManageModal = true;
       } catch (error) {
         this.isLoading = false;
-        return console.log(error);
+        this.secretStatus = 'active';
+
+        const { response: { data: { info = '', status = null } = {} } = {} } = error;
+
+        if (status && status === 400 && info && info === 'MISSING_DATA') {
+          this.shortStatus = 'error';
+          return this.error = 'Missing the required data!';
+        }
+
+        if (status && status === 404 && info && info === 'LINK_NOT_FOUND') {
+          this.shortStatus = 'error';
+          return this.error = 'Short URL not found!';
+        }
+
+        this.shortStatus = 'active';
+        return this.error = 'Oops! Something went wrong...';
       }
     },
     /**
