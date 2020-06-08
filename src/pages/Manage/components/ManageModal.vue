@@ -141,9 +141,10 @@ export default {
   background-color: white;
   border-radius: 15px;
   left: calc(50% - 216px);
+  margin: 24px 0;
   min-height: 650px;
   padding: 24px;
-  position: fixed;
+  position: absolute;
   top: calc(50% - 325px);
   width: 432px;
   z-index: 11;
