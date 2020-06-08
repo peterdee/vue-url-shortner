@@ -77,7 +77,7 @@ export default {
       const day = date.getDate();
       const month = months[date.getMonth()];
       const year = date.getFullYear();
-      return `${month} ${day}, ${year}, at ${hh}:${mm} GMT+0`;
+      return `${month} ${day}, ${year}, at ${hh}:${mm}`;
     },
   },
   name: 'ManageModal',
@@ -140,8 +140,8 @@ export default {
 .modal {
   background-color: white;
   border-radius: 15px;
-  height: 650px;
   left: calc(50% - 216px);
+  min-height: 650px;
   padding: 24px;
   position: fixed;
   top: calc(50% - 325px);
