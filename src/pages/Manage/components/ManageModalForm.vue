@@ -15,10 +15,10 @@
     <div class="flex justify-content-space-between">
       <SmallButton
         :isLoading="isLoading"
-        isDanger="true"
+        :isDanger="true"
         text="DELETE"
         type="submit"
-        @handle-small-button="$emit('handle-secret-form', $event)"
+        @handle-small-button.prevent="$emit('handle-secret-form')"
       />
       <SmallButton
         :isLoading="isLoading"

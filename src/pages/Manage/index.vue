@@ -5,8 +5,10 @@
     </div>
     <ManageModal
       :clicks="loaded.clicks"
+      :error="secretError"
       :handleInput="handleInput"
       :id="loaded.id"
+      :isLoading="isLoading"
       :link="loaded.link"
       :secret="secret"
       :secretStatus="secretStatus"
@@ -59,6 +61,7 @@ export default {
         url: '',
       },
       secret: '',
+      secretError: '',
       secretStatus: 'active',
       short: '',
       shortStatus: 'active',
@@ -73,9 +76,14 @@ export default {
      */
     handleInput(event = {}) {
       const { target: { name = '', value = '' } = {} } = event;
-      if (name === 'secret') this.secretStatus = 'active';
-      if (name === 'short') this.shortStatus = 'active';
-      this.error = '';
+      if (name === 'secret') {
+        this.secretError = '';
+        this.secretStatus = 'active';
+      }
+      if (name === 'short') {
+        this.error = '';
+        this.shortStatus = 'active';
+      }
       return this[name] = value;
     },
     /**
@@ -103,9 +111,8 @@ export default {
           return this.error = 'Please provide a valid Short URL!';
         }
 
-        this.secretStatus = 'success';
-        this.URLStatus = 'success';
         this.isLoading = true;
+        this.shortStatus = 'success';
 
         // send the request
         const shortId = this.short.split('/').slice(-1);
@@ -115,7 +122,6 @@ export default {
         });
 
         this.isLoading = false;
-        this.secretStatus = 'active';
         this.shortStatus = 'active';
 
         // check the response
@@ -126,7 +132,6 @@ export default {
           updated = null,
           url = '',
         } = response;
-        console.log(response)
         if (!(id && link && updated && url)) {
           return this.error = 'Oops! Something went wrong...';
         }
@@ -146,8 +151,52 @@ export default {
         return console.log(error);
       }
     },
-    handleSecretForm() {
-      return console.log('secret form');
+    /**
+     * Handle the secret form
+     * @returns {Promise<void>}
+     */
+    async handleSecretForm() {
+      try {
+        // check the values
+        if (!this.secret) {
+          this.secretStatus = 'error';
+          return this.secretError = 'Please provide your Secret!';
+        }
+
+        // check the trimmed values and sanitize them
+        const trimmedSecret = sanitize(this.secret.trim());
+        if (!trimmedSecret) {
+          this.secretStatus = 'error';
+          return this.secretError = 'Please provide your Secret!';
+        }
+
+        this.isLoading = true;
+        this.secretStatus = 'success';
+
+        // send the request
+        const shortId = this.short.split('/').slice(-1);
+        await axios({
+          data: {
+            secret: trimmedSecret,
+          },
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          method: 'POST',
+          url: `${BACKEND}/delete/${shortId}`,
+        });
+
+        this.isLoading = false;
+        this.secret = '';
+        this.secretStatus = 'active';
+        this.short = '';
+        this.shortStatus = 'active';
+
+        return this.showManageModal = false;
+      } catch (error) {
+        this.isLoading = false;
+        this.secretError = 'Error!';
+      }
     },
     /**
      * Toggle the Manage modal

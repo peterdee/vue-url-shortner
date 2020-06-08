@@ -20,7 +20,7 @@
           </div>
           <div class="slight-margin-top">
             <Textarea
-              disabled="true"
+              :disabled="true"
               :value="url"
             />
           </div>
@@ -29,7 +29,7 @@
           </div>
           <div class="slight-margin-top">
             <Textarea
-              disabled="true"
+              :disabled="true"
               :value="link"
             />
           </div>
@@ -44,6 +44,10 @@
             @handle-secret-form="$emit('handle-secret-form')"
             @handle-manage-modal="$emit('handle-manage-modal')"
           />
+          <ErrorMessage
+            :isLoading="isLoading"
+            :message="error"
+          />
         </div>
       </div>
     </div>
@@ -51,6 +55,7 @@
 </template>
 
 <script>
+import ErrorMessage from '../../../components/ErrorMessage';
 import ManageModalForm from './ManageModalForm';
 import ModalBackground from '../../../components/ModalBackground';
 import Textarea from '../../../components/Textarea';
@@ -59,6 +64,7 @@ import months from '../../../utilities/months-list';
 
 export default {
   components: {
+    ErrorMessage,
     ManageModalForm,
     ModalBackground,
     Textarea,
@@ -83,9 +89,24 @@ export default {
       required: false,
       type: [Number, String],
     },
+    error: {
+      default() {
+        return '';
+      },
+      required: false,
+      type: String,
+    },
+    handleInput: {
+      required: true,
+      type: Function,
+    },
     id: {
       required: true,
       type: String,
+    },
+    isLoading: {
+      required: true,
+      type: Boolean,
     },
     link: {
       required: true,
@@ -134,20 +155,6 @@ export default {
   font-size: 24px;
   font-weight: 200;
   color:rgb(43, 134, 146);
-}
-.button-close {
-  background-color: rgb(43, 134, 146);
-  border: none;
-  border-radius: 3px;
-  color: white;
-  font-size: 16px;
-  padding: 8px 0;
-  transition: background-color 250ms ease-in-out;
-  width: 100px;
-}
-.button-close:hover {
-  background-color: rgb(99, 220, 236);
-  transition: background-color 250ms ease-in-out;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .3s;

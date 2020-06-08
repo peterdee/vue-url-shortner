@@ -11,7 +11,7 @@
           </div>
           <div class="margin-top">
             <Textarea
-              disabled="true"
+              :disabled="true"
               :value="link"
             />
           </div>
